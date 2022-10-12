@@ -2,6 +2,12 @@
 	import TodoItem from '$lib/todo-item.svelte';
 
 	const title = 'Todo';
+
+	/** @type {import('./$types').PageData} */
+	export let data;
+
+	/** @type {import('./$types').ActionData} */
+	export let form;
 </script>
 
 <svelte:head>
@@ -9,10 +15,16 @@
 </svelte:head>
 
 <div class="todos">
-	<h>{title}</h>
+	<h1>{title}</h1>
 
-	<form action="" method="" class="new">
-		<input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo" />
+	{#if form?.success}
+		<p>Successfully logged in! Welcome back, {data.name}</p>
+	{/if}
+
+	{#if form?.missing}<p class="error">The Name field is required</p>{/if}
+
+	<form method="POST" class="new">
+		<input type="text" name="name" aria-label="Add a todo" placeholder="+ type to add a todo" />
 	</form>
 
 	<TodoItem />
