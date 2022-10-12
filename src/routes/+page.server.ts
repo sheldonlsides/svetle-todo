@@ -1,20 +1,26 @@
 // /** @type {import('./$types').Actions} */
-import { invalid } from '@sveltejs/kit';
+import { invalid, redirect, error } from '@sveltejs/kit';
+
+let todos: Todo[] = [];
 
 export const actions = {
 	default: async ({ cookies, request }) => {
 		const data = await request.formData();
 
-		const name = data.get('name');
+		const todo = data.get('name');
 
-		if (!name) {
-			return invalid(400, { name, missing: true });
+		console.log(data);
+
+		if (!todo) {
+			return invalid(400, { todo, missing: true });
+			// throw error(401, 'not logged in');
 		}
 
-		cookies.set('username', name);
+		todos.push(todo);
 
-		console.log(cookies.get('username'));
+		// cookies.set('username', name);
+		// console.log(cookies.get('username'));
 
-		return { success: true };
+		return { success: true, todos };
 	}
 };

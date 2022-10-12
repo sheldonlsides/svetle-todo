@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import TodoItem from '$lib/todo-item.svelte';
 
 	const title = 'Todo';
@@ -17,11 +18,15 @@
 <div class="todos">
 	<h1>{title}</h1>
 
-	{#if form?.success}
-		<p>Successfully logged in! Welcome back, {data.name}</p>
+	<!-- {#if form?.success}
+		<p>Successfully logged in! Welcome back, {form?.todos}</p>
+	{/if} -->
+
+	{#if form?.todos}
+		{form?.todos}
 	{/if}
 
-	{#if form?.missing}<p class="error">The Name field is required</p>{/if}
+	{#if form?.missing}<p class="error">You have to enter a Todo Item</p>{/if}
 
 	<form method="POST" class="new">
 		<input type="text" name="name" aria-label="Add a todo" placeholder="+ type to add a todo" />
