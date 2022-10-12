@@ -3,7 +3,7 @@ import { invalid, redirect, error } from '@sveltejs/kit';
 
 let todos: Todo[] = [];
 
-//load function to get todo items from api endpoint
+//load function runs on first page load -> to get todo items from api endpoint
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
 	const res = await fetch('http://127.0.0.1:5174/api/todos');
@@ -19,6 +19,7 @@ export async function load() {
 	}
 }
 
+// default action when the page is posted
 export const actions = {
 	default: async ({ cookies, request }) => {
 		const data = await request.formData();
