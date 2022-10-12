@@ -6,6 +6,7 @@
 	const title = 'Todo';
 
 	// gets data from props. This comes from the server
+	/** @type {import('./$types').PageData} */
 	export let data;
 	todos = data.props.todos;
 
