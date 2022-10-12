@@ -1,14 +1,15 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
 	import TodoItem from '$lib/todo-item.svelte';
 
+	export let todos: Todo[];
 	const title = 'Todo';
 
-	/** @type {import('./$types').PageData} */
+	// gets data from props. This comes from the server
 	export let data;
+	todos = data.props.todos;
 
-	/** @type {import('./$types').ActionData} */
-	export let form;
+	console.log(todos);
 </script>
 
 <svelte:head>
@@ -22,19 +23,18 @@
 		<p>Successfully logged in! Welcome back, {form?.todos}</p>
 	{/if} -->
 
-	{#if form?.todos}
+	<!-- {#if form?.todos}
 		{form?.todos}
 	{/if}
 
-	{#if form?.missing}<p class="error">You have to enter a Todo Item</p>{/if}
+	{#if form?.missing}<p class="error">You have to enter a Todo Item</p>{/if} -->
 
 	<form method="POST" class="new">
 		<input type="text" name="name" aria-label="Add a todo" placeholder="+ type to add a todo" />
 	</form>
-
-	<TodoItem />
-	<TodoItem />
-	<TodoItem />
+	{#each todos as todo}
+		<TodoItem />
+	{/each}
 </div>
 
 <style>
