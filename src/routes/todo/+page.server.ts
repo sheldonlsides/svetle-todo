@@ -8,8 +8,6 @@ let todos: Todo[] = [];
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ fetch }) {
 	const res = await fetch('/api/todos');
-	// const res = await fetch('http://127.0.0.1:5174/api/todos');
-	console.log(res);
 
 	if (res.ok) {
 		const todos = await res.json();
@@ -27,23 +25,24 @@ export async function load({ fetch }) {
 
 // default action when the page is posted
 export const actions = {
-	default: async ({ cookies, request }) => {
+	default: async ({ cookies, request, fetch }) => {
 		const data = await request.formData();
 
 		const name = data.get('name');
-
-		console.log(data);
 
 		if (!name) {
 			return invalid(400, { name, missing: true });
 			// throw error(401, 'not logged in');
 		}
 
-		todos.push({
+		let item: Todo = {
 			text: name,
-			created_at: new Date(),
-			done: false
-		});
+			done: false,
+			created_at: new Date()
+		};
+
+		//calls server api endpoint
+		await fetch('/api/todos', { method: 'POST', body: JSON.stringify(item) });
 
 		// console.log(JSON.parse(JSON.stringify({ success: true, todos })));
 		// console.log(todos);

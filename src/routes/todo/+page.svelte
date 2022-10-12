@@ -13,7 +13,6 @@
 	// /** @type {import('./$types').ActionData} */
 	// export let form;
 
-	// // console.log(todos);
 </script>
 
 <svelte:head>

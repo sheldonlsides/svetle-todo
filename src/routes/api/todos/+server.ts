@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
 
 let todos: Todo[] = [];
@@ -6,17 +6,18 @@ let todos: Todo[] = [];
 //api endpoint to get items
 /** @type {import('./$types').RequestHandler} */
 export function GET({}) {
-	todos.push({
-		text: 'Sara',
-		created_at: new Date(),
-		done: false
-	});
+	return json(todos);
+}
 
-	todos.push({
-		text: 'Sheldon',
-		created_at: new Date(),
-		done: false
-	});
+/** @type {import('./$types').RequestHandler} */
+export async function POST({ request }) {
+	let item: Todo = await request.json();
+	todos.push(item);
 
-	return new Response(JSON.stringify(todos));
+	console.log(item);
+	console.log('item added');
+
+	if (request.ok) return json(todos);
+
+	throw error(500, 'There was a problem adding item');
 }
