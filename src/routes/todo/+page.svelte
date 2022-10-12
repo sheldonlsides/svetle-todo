@@ -10,7 +10,10 @@
 	export let data;
 	todos = data.props.todos;
 
-	console.log(todos);
+	// /** @type {import('./$types').ActionData} */
+	// export let form;
+
+	// // console.log(todos);
 </script>
 
 <svelte:head>
@@ -21,7 +24,7 @@
 	<h1>{title}</h1>
 
 	<!-- {#if form?.success}
-		<p>Successfully logged in! Welcome back, {form?.todos}</p>
+		<p>Successfully logged in! Welcome back, {form?.todos[0].created_at}</p>
 	{/if} -->
 
 	<!-- {#if form?.todos}

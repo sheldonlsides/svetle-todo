@@ -12,11 +12,5 @@ export function GET({}) {
 	// 	done: false
 	// });
 
-	// todos.push({
-	// 	text: 'Sheldon',
-	// 	created_at: new Date(),
-	// 	done: false
-	// });
-
 	return new Response(JSON.stringify(todos));
 }
