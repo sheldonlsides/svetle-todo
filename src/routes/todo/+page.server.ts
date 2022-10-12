@@ -19,6 +19,10 @@ export async function load({ fetch }) {
 			props: { todos }
 		};
 	}
+
+	throw redirect(307, '/');
+
+	// throw error(500, 'There was an issue retrieving Todo Items');
 }
 
 // default action when the page is posted

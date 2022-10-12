@@ -37,7 +37,7 @@
 		<input type="text" name="name" aria-label="Add a todo" placeholder="+ type to add a todo" />
 	</form>
 	{#each todos as todo}
-		<TodoItem />
+		<TodoItem {todo} />
 	{/each}
 </div>
 
