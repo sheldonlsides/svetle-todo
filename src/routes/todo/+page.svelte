@@ -2,17 +2,18 @@
 	import { page } from '$app/stores';
 	import TodoItem from '$lib/todo-item.svelte';
 
-	export let todos: Todo[];
+	// export let todos: Todo[];
 	const title = 'Todo';
 
 	// gets data from props. This comes from the server
 	/** @type {import('./$types').PageData} */
 	export let data;
-	todos = data.props.todos;
+	// todos = data.props.todos;
 
-	// /** @type {import('./$types').ActionData} */
-	// export let form;
+	/** @type {import('./$types').ActionData} */
+	export let form;
 
+	console.log(form);
 </script>
 
 <svelte:head>
@@ -22,20 +23,26 @@
 <div class="todos">
 	<h1>{title}</h1>
 
-	<!-- {#if form?.success}
-		<p>Successfully logged in! Welcome back, {form?.todos[0].created_at}</p>
-	{/if} -->
-
-	<!-- {#if form?.todos}
-		{form?.todos}
+	{#if form?.success}
+		<p>You have successfully added a new Todo item</p>
 	{/if}
 
-	{#if form?.missing}<p class="error">You have to enter a Todo Item</p>{/if} -->
+	{#if form?.error}
+		<p class="error">
+			{form.error}
+		</p>
+	{/if}
 
 	<form method="POST" class="new">
-		<input type="text" name="name" aria-label="Add a todo" placeholder="+ type to add a todo" />
+		<input
+			type="text"
+			value={form?.name ?? ''}
+			name="name"
+			aria-label="Add a todo"
+			placeholder="+ type to add a todo"
+		/>
 	</form>
-	{#each todos as todo}
+	{#each data.props.todos as todo}
 		<TodoItem {todo} />
 	{/each}
 </div>

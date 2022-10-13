@@ -12,6 +12,7 @@ export function GET({ request }) {
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
+	//request.json() get formData request body
 	let item: Todo = await request.json();
 	return api(request, item);
 }
