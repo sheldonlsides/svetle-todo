@@ -1,6 +1,22 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { redirect } from '@sveltejs/kit';
+	import { browser } from '$app/environment';
 	//creates a prop that data can be passed to from a parent component
 	export let todo: Todo;
+
+	export const onClick = async (id: string) => {
+		const response = await fetch(`/api/todos/${todo.id}`, {
+			method: 'DELETE',
+			body: JSON.stringify({ id: todo.id }),
+			headers: {
+				'content-type': 'application/json',
+				id: todo.id
+			}
+		});
+
+		// let data = await response.json();
+	};
 </script>
 
 <div class="todo">
@@ -11,11 +27,12 @@
 
 	<form action="" method="">
 		<input type="text" value={todo.text} />
-		<button aria-label="Save todo" class="save" />
+		<button aria-label="Save todo" class="save" style="display: none" />
 	</form>
-
-	<form action="" method="POST">
-		<button aria-label="Delete todo" class="delete" />
+	<!-- action="/api/todos/{todo.id}?_method=DELETE" -->
+	<form>
+		<button aria-label="Delete todo" class="delete" on:click={onClick(todo.id)} />
+		<!-- <a href="#" class="delete" aria-label="Delete todo">Delete</a> -->
 	</form>
 </div>
 

@@ -4,6 +4,8 @@ import { api } from '../_api';
 
 //api endpoint to get items
 /** @type {import('./$types').RequestHandler} */
-export function DELETE({ request }) {
-	return api(request);
+export async function DELETE({ request }) {
+	let res = await api(request);
+	console.log(`my method is ${request.method}`);
+	return json({ status: res.status, message: 'Item successsfully deleted' });
 }

@@ -8,8 +8,8 @@
 	// gets data from props. This comes from the server
 	/** @type {import('./$types').PageData} */
 	export let data;
-	// todos = data.props.todos;
 
+	//represents formData
 	/** @type {import('./$types').ActionData} */
 	export let form;
 
@@ -42,7 +42,7 @@
 			placeholder="+ type to add a todo"
 		/>
 	</form>
-	{#each data.props.todos as todo}
+	{#each data.props.todos.todos as todo}
 		<TodoItem {todo} />
 	{/each}
 </div>
