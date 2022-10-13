@@ -39,10 +39,13 @@ export const actions = {
 		}
 
 		let item: Todo = {
+			id: crypto.randomUUID(),
 			text: name,
 			done: false,
 			created_at: new Date()
 		};
+
+		console.log(item);
 
 		//calls server api endpoint
 		await fetch('/api/todos', { method: 'POST', body: JSON.stringify(item) });

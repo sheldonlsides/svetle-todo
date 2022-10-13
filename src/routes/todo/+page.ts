@@ -5,7 +5,6 @@ let todos: Todo[] = [];
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ fetch }) {
 	const res = await fetch('/api/todos');
-	console.log(res);
 
 	if (res.ok) {
 		todos = await res.json();

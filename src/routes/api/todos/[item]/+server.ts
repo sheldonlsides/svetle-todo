@@ -1,10 +1,9 @@
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
-
-let todos: Todo[] = [];
+import { api } from '../_api';
 
 //api endpoint to get items
 /** @type {import('./$types').RequestHandler} */
-export function DELETE({}) {
-	return json({ name: 'Item Endpoint' });
+export function DELETE({ request }) {
+	return api(request);
 }
